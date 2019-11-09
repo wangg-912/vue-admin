@@ -42,6 +42,7 @@ export default {
       const first = matched[0];
 
       if (!this.isDashboard(first)) {
+        debugger;
         matched = [
           { path: "/dashboard", name: "仪表板", meta: { title: "仪表板" } }
         ].concat(matched);
@@ -56,7 +57,9 @@ export default {
       if (!name) {
         return false;
       }
-      return name.trim().toLocaleLowerCase() === "仪表板".toLocaleLowerCase();
+      return (
+        name.trim().toLocaleLowerCase() === "Dashboard".toLocaleLowerCase()
+      );
     },
     pathCompile(path) {
       // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561

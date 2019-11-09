@@ -52,11 +52,14 @@ export default {
       );
     },
     isDashboard(route) {
+      debugger;
       const name = route && route.name;
       if (!name) {
         return false;
       }
-      return name.trim().toLocaleLowerCase() === "仪表板".toLocaleLowerCase();
+      return (
+        name.trim().toLocaleLowerCase() === "Dashboard".toLocaleLowerCase()
+      );
     },
     pathCompile(path) {
       // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561
