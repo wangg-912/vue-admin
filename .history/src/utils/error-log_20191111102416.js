@@ -3,8 +3,8 @@ import store from '@/store'
 import { isString, isArray } from '@/utils/validate'
 import settings from '@/settings'
 
-// 您可以在settings.js中进行设置
-// errorLog：'production'| [“生产”，“发展”]
+//您可以在settings.js中进行设置
+//errorLog：'production'| [“生产”，“发展”]
 const { errorLog: needErrorLog } = settings
 
 function checkNeed() {
@@ -20,7 +20,7 @@ function checkNeed() {
 
 if (checkNeed()) {
   Vue.config.errorHandler = function (err, vm, info, a) {
-    // use Vue.nextTick, it just a hack .
+    // Don't ask me why I use Vue.nextTick, it just a hack.
     // detail see https://forum.vuejs.org/t/dispatch-in-vue-config-errorhandler-has-some-problem/23500
     Vue.nextTick(() => {
       store.dispatch('errorLog/addErrorLog', {

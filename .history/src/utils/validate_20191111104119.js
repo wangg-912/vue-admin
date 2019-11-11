@@ -1,4 +1,5 @@
 
+
 /**
  * @param {string} path
  * @returns {Boolean}

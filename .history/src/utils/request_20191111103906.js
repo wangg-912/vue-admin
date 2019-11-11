@@ -45,7 +45,7 @@ service.interceptors.response.use(
   response => {
     const res = response.data
 
-    // 如果自定义代码不是20000，则将其判断为错误。这里只是一个例子，真是项目应该以前后端协商结果标识为准
+    // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
       Message({
         message: res.message || 'Error',
@@ -53,7 +53,7 @@ service.interceptors.response.use(
         duration: 5 * 1000
       })
 
-      // 50008：非法令牌； 50012：其他客户端登录； 50014：令牌已过期；
+      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
         // to re-login
         MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {

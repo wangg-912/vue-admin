@@ -3,49 +3,49 @@ import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
-// 创建axios实例
+// create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // 网址=基本网址+请求网址
-  // withCredentials：true，//跨域请求时发送cookie
+  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
 
 // request interceptor
 service.interceptors.request.use(
   config => {
-    // 发送请求前需要处理的业务
+    // do something before request is sent
 
     if (store.getters.token) {
-      // 让每个请求都携带令牌
-      // ['X-Token']是自定义标头键
-      // 请根据实际情况进行修改
+      // let each request carry token
+      // ['X-Token'] is a custom headers key
+      // please modify it according to the actual situation
       config.headers['X-Token'] = getToken()
     }
     return config
   },
   error => {
-    // 发送请求错误的操作
+    // do something with request error
     console.log(error) // for debug
     return Promise.reject(error)
   }
 )
 
-// 响应拦截器
+// response interceptor
 service.interceptors.response.use(
   /**
-   *如果您想获取诸如标题或状态之类的http信息
-   *请返回响应=>响应
+   * If you want to get http information such as headers or status
+   * Please return  response => response
   */
 
   /**
-   *通过自定义代码确定请求状态
-   *这只是一个例子
-   *您也可以通过HTTP状态代码来判断状态
+   * Determine the request status by custom code
+   * Here is just an example
+   * You can also judge the status by HTTP Status Code
    */
   response => {
     const res = response.data
 
-    // 如果自定义代码不是20000，则将其判断为错误。这里只是一个例子，真是项目应该以前后端协商结果标识为准
+    // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
       Message({
         message: res.message || 'Error',
@@ -53,7 +53,7 @@ service.interceptors.response.use(
         duration: 5 * 1000
       })
 
-      // 50008：非法令牌； 50012：其他客户端登录； 50014：令牌已过期；
+      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
         // to re-login
         MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
