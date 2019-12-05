@@ -135,7 +135,7 @@ export default {
   left: -40px;
   text-align: center;
   font-size: 24px;
-  border-radius: 8px 0 0 8px !important;
+  border-radius: 6px 0 0 6px !important;
   z-index: 0;
   pointer-events: auto;
   cursor: pointer;

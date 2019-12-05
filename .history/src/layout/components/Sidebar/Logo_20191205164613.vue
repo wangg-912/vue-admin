@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-logo-container" :class="{ collapse: collapse }">
+  <div class="sidebar-logo-container" :class="{ collapse: collapse }" :style="getMenuBg">
     <transition name="sidebarLogoFade">
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
         <img v-if="logo" :src="logo" class="sidebar-logo" />
@@ -28,10 +28,17 @@ export default {
       logo:
         "https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png"
     };
+  },
+  mounted(){
+    getMenuBg(){
+      return {
+        background:variables.$menuBg
+      }
+    }
   }
 };
 </script>
-
+import variables from "@/styles/variables.scss";
 <style lang="scss" scoped>
 .sidebarLogoFade-enter-active {
   transition: opacity 1.5s;

@@ -10,6 +10,7 @@
         :unique-opened="false"
         :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
+        :style="activeMenuBg"
         mode="vertical"
       >
         <sidebar-item
@@ -42,7 +43,17 @@ export default {
       }
       return path;
     },
-
+    activeMenuBg() {
+      debugger;
+      //menuActiveMenuBg
+      const route = this.$route;
+      const { meta, path } = route;
+      // if set path, the sidebar will highlight the path you set
+      if (meta.activeMenu) {
+        return { background: variables.$menuActiveMenuBg };
+      }
+      return {};
+    },
     showLogo() {
       return this.$store.state.settings.sidebarLogo;
     },

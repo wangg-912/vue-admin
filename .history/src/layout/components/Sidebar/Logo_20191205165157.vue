@@ -31,7 +31,7 @@ export default {
   }
 };
 </script>
-
+import variables from "@/styles/variables.scss";
 <style lang="scss" scoped>
 .sidebarLogoFade-enter-active {
   transition: opacity 1.5s;
